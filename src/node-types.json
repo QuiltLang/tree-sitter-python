@@ -212,6 +212,10 @@
         "named": true
       },
       {
+        "type": "quilt_hole",
+        "named": true
+      },
+      {
         "type": "subscript",
         "named": true
       },
@@ -1620,6 +1624,10 @@
           "named": true
         },
         {
+          "type": "quilt_hole",
+          "named": true
+        },
+        {
           "type": "yield",
           "named": true
         }
@@ -2646,6 +2654,11 @@
         }
       ]
     }
+  },
+  {
+    "type": "quilt_hole",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "raise_statement",
