@@ -666,6 +666,7 @@ module.exports = grammar({
       $.list_splat_pattern,
       $.tuple_pattern,
       $.list_pattern,
+      $.quilt_hole,
     ),
 
     tuple_pattern: $ => seq(
