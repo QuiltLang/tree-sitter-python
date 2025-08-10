@@ -220,6 +220,7 @@ module.exports = grammar({
       $.assignment,
       $.augmented_assignment,
       $.yield,
+      $.quilt_hole,
     ),
 
     named_expression: $ => seq(
