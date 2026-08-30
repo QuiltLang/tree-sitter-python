@@ -5,10 +5,9 @@ Quilt Expression
 --------------------------------------------------------------------------------
 
 (module
-  (expression_statement
-    (binary_operator
-      (integer)
-      (integer))))
+  (binary_operator
+    (integer)
+    (integer)))
 
 ================================================================================
 Quilt Statement
@@ -17,10 +16,9 @@ x = y
 --------------------------------------------------------------------------------
 
 (module
-  (expression_statement
-    (assignment
-      (identifier)
-      (identifier))))
+  (assignment
+    (identifier)
+    (identifier)))
 
 ================================================================================
 Quilt Hole
@@ -29,8 +27,7 @@ _
 --------------------------------------------------------------------------------
 
 (module
-  (expression_statement
-    (quilt_hole)))
+  (quilt_hole))
 
 ================================================================================
 Quilt Hole Var
@@ -39,7 +36,6 @@ _ = y
 --------------------------------------------------------------------------------
 
 (module
-  (expression_statement
-    (assignment
-      (quilt_hole)
-      (identifier))))
+  (assignment
+    (quilt_hole)
+    (identifier)))

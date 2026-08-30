@@ -150,6 +150,36 @@
     ]
   },
   {
+    "type": "expression_statement",
+    "named": true,
+    "subtypes": [
+      {
+        "type": "assignment",
+        "named": true
+      },
+      {
+        "type": "augmented_assignment",
+        "named": true
+      },
+      {
+        "type": "expression",
+        "named": true
+      },
+      {
+        "type": "quilt_hole",
+        "named": true
+      },
+      {
+        "type": "tuple_expression",
+        "named": true
+      },
+      {
+        "type": "yield",
+        "named": true
+      }
+    ]
+  },
+  {
     "type": "parameter",
     "named": true,
     "subtypes": [
@@ -1518,7 +1548,7 @@
         ]
       },
       "value": {
-        "multiple": false,
+        "multiple": true,
         "required": false,
         "types": [
           {
@@ -1534,25 +1564,6 @@
       "types": [
         {
           "type": "block",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "except_group_clause",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "block",
-          "named": true
-        },
-        {
-          "type": "expression",
           "named": true
         }
       ]
@@ -1598,37 +1609,6 @@
       "types": [
         {
           "type": "expression",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "expression_statement",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "assignment",
-          "named": true
-        },
-        {
-          "type": "augmented_assignment",
-          "named": true
-        },
-        {
-          "type": "expression",
-          "named": true
-        },
-        {
-          "type": "quilt_hole",
-          "named": true
-        },
-        {
-          "type": "yield",
           "named": true
         }
       ]
@@ -2923,7 +2903,7 @@
     },
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "else_clause",
@@ -2931,10 +2911,6 @@
         },
         {
           "type": "except_clause",
-          "named": true
-        },
-        {
-          "type": "except_group_clause",
           "named": true
         },
         {
@@ -2966,6 +2942,21 @@
         },
         {
           "type": "yield",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "tuple_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
           "named": true
         }
       ]
@@ -3624,10 +3615,6 @@
   },
   {
     "type": "except",
-    "named": false
-  },
-  {
-    "type": "except*",
     "named": false
   },
   {
