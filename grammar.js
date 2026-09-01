@@ -118,7 +118,7 @@ module.exports = grammar({
   rules: {
     module: $ => repeat($._statement),
 
-    quilt_hole: $ => "_",
+    quilt_hole: $ => '_',
 
     _statement: $ => choice(
       $._simple_statements,
