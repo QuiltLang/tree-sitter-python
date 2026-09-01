@@ -118,8 +118,6 @@ module.exports = grammar({
   rules: {
     module: $ => repeat($._statement),
 
-    quilt_hole: $ => '_',
-
     _statement: $ => choice(
       $._simple_statements,
       $._compound_statement,
@@ -234,7 +232,6 @@ module.exports = grammar({
       $.assignment,
       $.augmented_assignment,
       $.yield,
-      $.quilt_hole,
     ),
 
     tuple_expression: $ =>
@@ -661,7 +658,6 @@ module.exports = grammar({
       $.list_splat_pattern,
       $.tuple_pattern,
       $.list_pattern,
-      $.quilt_hole,
     ),
 
     tuple_pattern: $ => seq(

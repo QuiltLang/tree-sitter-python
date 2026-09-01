@@ -166,10 +166,6 @@
         "named": true
       },
       {
-        "type": "quilt_hole",
-        "named": true
-      },
-      {
         "type": "tuple_expression",
         "named": true
       },
@@ -239,10 +235,6 @@
       },
       {
         "type": "list_splat_pattern",
-        "named": true
-      },
-      {
-        "type": "quilt_hole",
         "named": true
       },
       {
@@ -2634,11 +2626,6 @@
         }
       ]
     }
-  },
-  {
-    "type": "quilt_hole",
-    "named": true,
-    "fields": {}
   },
   {
     "type": "raise_statement",
