@@ -47,7 +47,13 @@ jobs:
           git clone https://github.com/numpy/numpy examples/numpy --single-branch --depth=1 --filter=blob:none
           git clone https://github.com/django/django examples/django --single-branch --depth=1 --filter=blob:none
           git clone https://github.com/pallets/flask examples/flask --single-branch --depth=1 --filter=blob:none
-          git clone https://github.com/python/cpython examples/cpython --single-branch --depth=1 --filter=blob:none
+          # Pinned to a release tag, unlike upstream's floating `main`: CPython main
+          # has adopted PEP 810 lazy imports (`lazy from x import y`), which this
+          # grammar has no rule for, so every file using them parses to an ERROR and
+          # this job is red for a reason that has nothing to do with the Quilt patches.
+          # That gap is upstream's to close — tree-sitter/tree-sitter-python#335.
+          # Revert to `main` once it lands. See QuiltLang/quilt#184.
+          git clone https://github.com/python/cpython examples/cpython --single-branch --depth=1 --filter=blob:none --branch v3.14.0
       - name: Parse examples
         uses: tree-sitter/parse-action@v4
         with:
