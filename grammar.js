@@ -60,6 +60,7 @@ module.exports = grammar({
   supertypes: $ => [
     $._simple_statement,
     $._compound_statement,
+    $.expression_statement,
     $.expression,
     $.primary_expression,
     $.pattern,
@@ -99,12 +100,23 @@ module.exports = grammar({
     $.keyword_identifier,
   ],
 
+  reserved: {
+    global: _ => [
+      // https://docs.python.org/3/reference/lexical_analysis.html#keywords
+      'False', 'await', 'else', 'import', 'pass',
+      'None', 'break', 'except', 'in', 'raise',
+      'True', 'class', 'finally', 'is', 'return',
+      'and', 'continue', 'for', 'lambda', 'try',
+      'as', 'def', 'from', 'nonlocal', 'while',
+      'assert', 'del', 'global', 'not', 'with',
+      'async', 'elif', 'if', 'or', 'yield',
+    ],
+  },
+
   word: $ => $.identifier,
 
   rules: {
     module: $ => repeat($._statement),
-
-    quilt_hole: $ => "_",
 
     _statement: $ => choice(
       $._simple_statements,
@@ -216,12 +228,14 @@ module.exports = grammar({
 
     expression_statement: $ => choice(
       $.expression,
-      seq(commaSep1($.expression), optional(',')),
+      $.tuple_expression,
       $.assignment,
       $.augmented_assignment,
       $.yield,
-      $.quilt_hole,
     ),
+
+    tuple_expression: $ =>
+      seq($.expression, ',', optional(seq(commaSep1($.expression), optional(',')))),
 
     named_expression: $ => seq(
       field('name', $._named_expression_lhs),
@@ -344,43 +358,21 @@ module.exports = grammar({
       'try',
       ':',
       field('body', $._suite),
-      choice(
-        seq(
-          repeat1($.except_clause),
-          optional($.else_clause),
-          optional($.finally_clause),
-        ),
-        seq(
-          repeat1($.except_group_clause),
-          optional($.else_clause),
-          optional($.finally_clause),
-        ),
-        $.finally_clause,
-      ),
+      repeat($.except_clause),
+      optional($.else_clause),
+      optional($.finally_clause),
     ),
 
     except_clause: $ => seq(
       'except',
-      optional(seq(
-        field('value', $.expression),
-        optional(seq(
-          choice('as', ','),
-          field('alias', $.expression),
-        )),
+      optional(token(prec(1, '*'))),
+      optional(choice(
+        seq(
+          field('value', $.expression),
+          optional(seq('as', field('alias', $.expression))),
+        ),
+        commaSep1(field('value', $.expression)),
       )),
-      ':',
-      $._suite,
-    ),
-
-    except_group_clause: $ => seq(
-      'except*',
-      seq(
-        $.expression,
-        optional(seq(
-          'as',
-          $.expression,
-        )),
-      ),
       ':',
       $._suite,
     ),
@@ -666,7 +658,6 @@ module.exports = grammar({
       $.list_splat_pattern,
       $.tuple_pattern,
       $.list_pattern,
-      $.quilt_hole,
     ),
 
     tuple_pattern: $ => seq(
